@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       department: {
         type: DataTypes.STRING,
-        allowNull: false,
+        // allowNull: false,
       },
     },
 
@@ -46,13 +46,13 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Admin.associate = (db) => {
-    Admin.hasMany(db.Vacation, {
-      foreignKey: {
-        name: "userId",
-        allowNull: false,
-      },
-      onDelete: "RESTRICT",
-    });
+    // Admin.hasMany(db.Vacation, {
+    //   foreignKey: {
+    //     name: "userId",
+    //     allowNull: false,
+    //   },
+    //   onDelete: "RESTRICT",
+    // });
   };
   return Admin;
 };

@@ -8,6 +8,14 @@ module.exports = (sequelize, DataTypes) => {
   const Vacation = sequelize.define(
     "Vacation",
     {
+      typeOfLeave: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      department: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       reason: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -21,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: VACATION_PENDING,
       },
+
       createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
@@ -39,14 +48,14 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Vacation.associate = (db) => {
-    Vacation.belongsTo(db.Admin, {
-      foreignKey: {
-        name: "userId",
-        allowNull: false,
-      },
-      onDelete: "RESTRICT",
-    });
-
+    // Vacation.belongsTo(db.Admin, {
+    //   foreignKey: {
+    //     name: "upDateUserId",
+    //     allowNull: false,
+    //   },
+    //   onDelete: "RESTRICT",
+    // });
+    // ++++++++++++++++++++++++
     Vacation.belongsTo(db.User, {
       foreignKey: {
         name: "userId",

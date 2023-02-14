@@ -34,13 +34,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      department: {
-        type: DataTypes.STRING,
-        // allowNull: false,
-      },
+      // department: {
+      //   type: DataTypes.STRING,
+      //   // allowNull: false,
+      // },
       max_date: {
-        type: DataTypes.STRING,
-        // allowNull: false,
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 12,
       },
     },
 

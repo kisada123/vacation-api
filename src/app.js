@@ -7,6 +7,7 @@ const cors = require("cors");
 const chalk = require("chalk");
 const morgan = require("morgan");
 
+const vacationRouter = require("./routes/vacation-route");
 const authRoute = require("./routes/auth-route");
 const notFoundMiddlewares = require("./middlewares/not-found");
 const errorMiddlewares = require("./middlewares/error");
@@ -18,6 +19,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/auth", authRoute);
+app.use("/", vacationRouter); // routes)
 
 app.use(notFoundMiddlewares);
 app.use(errorMiddlewares);
