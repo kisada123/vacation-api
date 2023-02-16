@@ -13,7 +13,7 @@ exports.getAllVacation = async (req, res, next) => {
   }
 };
 exports.getAllAdminVacation = async (req, res, next) => {
-  console.log("getAllVacation");
+  console.log("getAllAdminVacation");
   try {
     const vacationList = await Vacation.findAll({});
     console.log(vacationList);
@@ -65,12 +65,12 @@ exports.approveVacation = async (req, res, next) => {
     console.log("approveVacation", approveVacation.status);
     const updateData = {
       id: req.params.id,
-      typeOfLeave: approveVacation.typeOfLeave,
-      department: approveVacation.department,
+      // typeOfLeave: approveVacation.typeOfLeave,
+      // department: approveVacation.department,
       status: "ACCEPTED",
       createdAt: approveVacation.createdAt,
       updatedAt: approveVacation.updatedAt,
-      userId: approveVacation.userId,
+      // userId: approveVacation.userId,
     };
     console.log("updateData", updateData);
 
@@ -78,7 +78,7 @@ exports.approveVacation = async (req, res, next) => {
       where: { id: req.params.id },
     });
 
-    res.status(204).json();
+    res.status(200).json();
   } catch (err) {
     next(err);
   }
@@ -94,20 +94,20 @@ exports.rejectVacation = async (req, res, next) => {
     console.log("rejectVacation", rejectVacation.status);
     const updateData = {
       id: req.params.id,
-      typeOfLeave: rejectVacation.typeOfLeave,
-      department: rejectVacation.department,
+      // typeOfLeave: rejectVacation.typeOfLeave,
+      // department: rejectVacation.department,
       status: "REJECT",
       createdAt: rejectVacation.createdAt,
       updatedAt: rejectVacation.updatedAt,
-      userId: rejectVacation.userId,
+      // userId: rejectVacation.userId,
     };
-    console.log("updateData", updateData);
+    // console.log("updateData", updateData);
 
     await Vacation.update(updateData, {
       where: { id: req.params.id },
     });
 
-    res.status(204).json();
+    res.status(200).json();
   } catch (err) {
     next(err);
   }

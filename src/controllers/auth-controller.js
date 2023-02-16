@@ -86,9 +86,7 @@ exports.vacation = async (req, res, next) => {
 exports.login = async (req, res, next) => {
   try {
     const value = validateLogin(req.body);
-    // ++++
-    const vacation = await Vacation.findOne({});
-    // ++++
+
     const user = await User.findOne({
       where: {
         [Op.or]: [{ email: value.email || "" }],
