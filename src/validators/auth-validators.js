@@ -94,6 +94,14 @@ const vacationSchema = Joi.object({
     "any.required": "id",
     "string.empty": "id",
   }),
+  startDate: Joi.string().trim().required().messages({
+    "any.required": "กรุณาใส่วันเริ่มต้นลาหยุด",
+    "string.empty": "กรุณาใส่วันเริ่มต้นลาหยุด",
+  }),
+  endDate: Joi.string().trim().required().messages({
+    "any.required": "กรุณาใส่วันเริ่มต้นลาหยุด",
+    "string.empty": "กรุณาใส่วันเริ่มต้นลาหยุด",
+  }),
   createdAt: Joi.string().trim().required().messages({
     "any.required": "กรุณาใส่วันเริ่มต้นลาหยุด",
     "string.empty": "กรุณาใส่วันเริ่มต้นลาหยุด",

@@ -1,10 +1,11 @@
-const { Vacation } = require("../models");
+const { Vacation, User } = require("../models");
 
 exports.getAllVacation = async (req, res, next) => {
   console.log("getAllVacation");
   try {
     const vacationList = await Vacation.findAll({
       where: { userId: req.user.id },
+      include: { model: User },
     });
     console.log(vacationList);
     res.status(200).json({ data: vacationList });
@@ -15,7 +16,22 @@ exports.getAllVacation = async (req, res, next) => {
 exports.getAllAdminVacation = async (req, res, next) => {
   console.log("getAllAdminVacation");
   try {
-    const vacationList = await Vacation.findAll({});
+    const vacationList = await Vacation.findAll({
+      include: { model: User },
+    });
+    console.log(vacationList);
+    res.status(200).json({ data: vacationList });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getAllAdminVacationAllName = async (req, res, next) => {
+  console.log("getAllAdminVacation");
+  try {
+    const vacationList = await User.findAll({
+      include: { model: Vacation },
+    });
     console.log(vacationList);
     res.status(200).json({ data: vacationList });
   } catch (err) {
@@ -38,17 +54,17 @@ exports.deleteVacation = async (req, res, next) => {
   // console.log("req.user.id", req.user.id);
 
   try {
-    const totalDelete = await Vacation.findOne(req.body, {
-      where: { id: req.params.id },
-    });
-
     // if (!totalDelete) {
     //   createError("this post was not found", 400);
     // }
     // if (totalDelete.userId !== req.params.id) {
     //   createError("you have no permission to delete this post", 403);
     // }
-    await totalDelete.destroy();
+    await Vacation.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
     res.status(204).json();
   } catch (err) {
     next(err);

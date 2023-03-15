@@ -126,19 +126,19 @@ exports.login = async (req, res, next) => {
 exports.loginAdmin = async (req, res, next) => {
   try {
     const value = validateLogin(req.body);
-
+    console.log(req.body);
     const admin = await Admin.findOne({
       where: {
         [Op.or]: [{ email: value.email || "" }],
       },
     });
     if (!admin) {
-      createError("อีเมลหรือรหัสผ่านไม่ถูกต้อง", 400);
+      createError("อีเมลหรือรหัสผ่านไม่ถูกต้อง 1", 400);
     }
 
     const isCorrect = await bcrypt.compare(value.password, admin.password);
     if (!isCorrect) {
-      createError("อีเมลหรือรหัสผ่านไม่ถูกต้อง", 400);
+      createError("อีเมลหรือรหัสผ่านไม่ถูกต้อง 2", 400);
     }
 
     const accessToken = jwt.sign(
@@ -165,4 +165,17 @@ exports.loginAdmin = async (req, res, next) => {
 
 exports.getMe = (req, res, next) => {
   res.status(200).json({ user: req.user });
+};
+
+exports.getMeAdmin = async (req, res, next) => {
+  try {
+    const admin = await Admin.findOne({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.status(200).json({ admin });
+  } catch (err) {
+    next(err);
+  }
 };

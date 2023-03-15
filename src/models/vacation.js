@@ -30,6 +30,21 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: VACATION_PENDING,
       },
 
+      // startDate: {
+      //   type: DataTypes.STRING,
+      //   allowNull: true,
+      // },
+      startDate: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: sequelize.fn("NOW"),
+      },
+      endDate: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: sequelize.fn("NOW"),
+      },
+
       createdAt: {
         type: DataTypes.DATE,
         allowNull: false,

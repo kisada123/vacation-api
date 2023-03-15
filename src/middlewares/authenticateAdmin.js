@@ -1,22 +1,23 @@
 const jwt = require("jsonwebtoken");
 const createError = require("../utils/create-error");
-const { User, Admin } = require("../models");
+const { Admin } = require("../models");
 
 module.exports = async (req, res, next) => {
   try {
     const { authorization } = req.headers;
     if (!authorization || !authorization.startsWith("Bearer ")) {
-      createError("you are unauthorized", 401);
+      createError("you are unauthorized1", 401);
     }
     const token = authorization.split(" ")[1];
     const payload = jwt.verify(token, process.env.JWT_SECRET_KEY);
-    const user = await User.findOne({
+    const admin = await Admin.findOne({
       where: { id: payload.id, email: payload.email },
     });
-    if (!user) {
-      createError("you are unauthorized", 401);
+    console.log("payload.id", payload.id);
+    if (!admin) {
+      createError("you are unauthorized2", 401);
     }
-    req.user = user;
+    req.admin = admin;
     next();
   } catch (err) {
     next(err);
